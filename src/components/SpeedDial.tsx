@@ -1,3 +1,5 @@
+"use client";
+
 import SpeedDial from "@mui/material/SpeedDial";
 import SpeedDialIcon from "@mui/material/SpeedDialIcon";
 import SpeedDialAction from "@mui/material/SpeedDialAction";
@@ -6,7 +8,7 @@ import { useState, useEffect } from "react";
 import { AuthSession, User } from "@supabase/supabase-js";
 import { supabase } from "@/lib/supabase";
 import { Create } from "@mui/icons-material";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { track } from "@vercel/analytics";
 
 const actions = [
@@ -42,7 +44,7 @@ export default function SpeedDialTooltipOpen() {
         provider: "google",
         options: {
           queryParams: {
-            hd: "seas.upenn.edu",
+            hd: "engineering.upenn.edu",
           },
           redirectTo: `${baseUrl}/reviews/create-review`,
         },
@@ -62,16 +64,8 @@ export default function SpeedDialTooltipOpen() {
       }
     } else if (actionName === "Contact Us") {
       track("Contact-Us-Clicked");
-      window.location.href = "mailto:lwinm@seas.upenn.edu";
+      window.location.assign("mailto:mcitosa@engineering.upenn.edu");
     }
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const handleOpen = () => {
-    setOpen(true);
   };
 
   return (
@@ -100,7 +94,7 @@ export default function SpeedDialTooltipOpen() {
         <SpeedDialAction
           key={action.name}
           icon={action.icon}
-          tooltipTitle={action.name}
+          slotProps={{ tooltip: { title: action.name } }}
           onClick={() => handleAction(action.name)}
         />
       ))}

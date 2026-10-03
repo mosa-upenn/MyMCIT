@@ -1,5 +1,7 @@
+"use client";
+
 import React from "react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { Button } from "@mui/material";
 import { supabase } from "@/lib/supabase";
 
@@ -24,7 +26,7 @@ export default function AddReviewButton() {
           provider: "google",
           options: {
             queryParams: {
-              hd: "seas.upenn.edu",
+              hd: "engineering.upenn.edu",
             },
             redirectTo: `${baseUrl}/reviews/create-review`,
           },
